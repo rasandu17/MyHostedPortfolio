@@ -1,10 +1,6 @@
 const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
 const API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
 
-// Add debugging for API key
-console.log('API key available:', !!API_KEY);
-console.log('API key length:', API_KEY?.length || 0);
-
 /**
  * Creates a system prompt with portfolio data to guide the AI's responses
  * @param {Object} portfolioData - Your portfolio data
@@ -50,14 +46,6 @@ export const fetchGeminiResponse = async (userPrompt, portfolioData) => {
   const systemPrompt = createSystemPrompt(portfolioData);
   
   try {
-    // Check if API key is available
-    if (!API_KEY) {
-      console.error('Gemini API key is missing. Please check your environment variables.');
-      return "I'm experiencing technical difficulties with my AI capabilities. Please try asking about my portfolio directly.";
-    }
-    
-    console.log('Attempting to call Gemini API...');
-    
     const response = await fetch(`${API_URL}?key=${API_KEY}`, {
       method: 'POST',
       headers: {
@@ -98,30 +86,18 @@ export const fetchGeminiResponse = async (userPrompt, portfolioData) => {
     });
 
     if (!response.ok) {
-      const errorText = await response.text();
-      console.error(`API request failed with status ${response.status}:`, errorText);
-      throw new Error(`API request failed with status ${response.status}: ${errorText}`);
+      throw new Error(`API request failed with status ${response.status}`);
     }
 
     const data = await response.json();
-    console.log('Gemini API response received successfully');
     
     if (!data.candidates || data.candidates.length === 0) {
-      console.error('No candidates in response:', data);
       throw new Error('No response from AI model');
     }
     
     return data.candidates[0].content.parts[0].text;
   } catch (error) {
     console.error('Error calling Gemini API:', error);
-    
-    // Provide more specific error message based on the error
-    if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
-      return "I'm having network connectivity issues. Please try again in a moment.";
-    } else if (error.message.includes('API key')) {
-      return "I'm experiencing authentication issues with my AI capabilities. Please try asking about my portfolio directly.";
-    } else {
-      return "I'm sorry, I couldn't process your request. Please try again with a question about my portfolio or experiences.";
-    }
+    throw error;
   }
 };

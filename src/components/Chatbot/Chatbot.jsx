@@ -24,18 +24,6 @@ const Chatbot = () => {
     scrollToBottom();
   }, [messages]);
 
-  // Add a check for API key on component mount
-  useEffect(() => {
-    const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-    console.log('Chatbot - API Key available:', !!apiKey);
-    console.log('Chatbot - API Key length:', apiKey?.length || 0);
-    
-    // Add warning to console if API key is missing
-    if (!apiKey) {
-      console.warn('VITE_GEMINI_API_KEY is missing. Chatbot will not function correctly.');
-    }
-  }, []);
-
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -107,13 +95,6 @@ const Chatbot = () => {
           
           setMessages(prev => [...prev, botMessage]);
         } else {
-          // Check for API key before making request
-          const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-          if (!apiKey) {
-            console.error('Missing API key - cannot make request to Gemini');
-            throw new Error('API key is missing');
-          }
-          
           // Normal AI response for portfolio questions
           const aiResponse = await fetchGeminiResponse(input, portfolioData);
           
@@ -130,16 +111,9 @@ const Chatbot = () => {
     } catch (error) {
       console.error('Error fetching response:', error);
       
-      // More specific error messages based on error type
-      let errorText = "I'm sorry, I couldn't process your request. Please try again with a question about my portfolio or experiences.";
-      
-      if (error.message === 'API key is missing') {
-        errorText = "I'm currently experiencing configuration issues. My AI capabilities are limited at the moment. Please try asking direct questions about my portfolio.";
-      }
-      
       const errorMessage = {
         id: messages.length + 2,
-        text: errorText,
+        text: "I'm sorry, I couldn't process your request. Please try again with a question about my portfolio or experiences.",
         sender: 'bot',
         timestamp: new Date().toISOString()
       };
