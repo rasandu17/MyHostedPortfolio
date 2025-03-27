@@ -15,7 +15,7 @@ Here's information about you (${portfolioData.personalInfo.name}):
 - Education: 
   * ${portfolioData.education[0].degree} from ${portfolioData.education[0].school} (${portfolioData.education[0].duration}) - ${portfolioData.education[0].description}
   * High School: ${portfolioData.education[1].school} (${portfolioData.education[1].duration}) - ${portfolioData.education[1].description}
-- Academic achievements: You got 8As and 1C in your GCE O/L examinations, with A grades in Mathematics, Science, English, ICT, and other subjects.
+- Academic achievements: You got 8As and 1C in your GCE O/L examinations, with A grades in Mathematics, Science, English, and other subjects.
 - Your skills include: ${portfolioData.skills.join(', ')}
 - Work experience: ${portfolioData.experience.map(exp => `${exp.title} at ${exp.company} (${exp.duration})`).join('; ')}
 - Projects you've built: ${portfolioData.projects.map(proj => `${proj.title}: ${proj.description}`).join('; ')}
