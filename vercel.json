@@ -1,7 +1,7 @@
 {
   "version": 2,
   "env": {
-    "VITE_GEMINI_API_KEY": "${VITE_GEMINI_API_KEY}"
+    "VITE_GEMINI_API_KEY": "AIzaSyCjObghqxKWiCfhWQltxmWupeze36GS3bY"
   },
   "builds": [
     {
