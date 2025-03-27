@@ -1,0 +1,15 @@
+{
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "/(.*)", "dest": "/index.html" }
+  ],
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "framework": "vite",
+  "github": {
+    "silent": true
+  },
+  "environmentVariables": {
+    "VITE_GEMINI_API_KEY": "PLACEHOLDER"
+  }
+}
