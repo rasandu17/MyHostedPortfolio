@@ -1,6 +1,10 @@
 const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
 const API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
 
+// Add debugging for API key
+console.log('API key available:', !!API_KEY);
+console.log('API key length:', API_KEY?.length || 0);
+
 /**
  * Creates a system prompt with portfolio data to guide the AI's responses
  * @param {Object} portfolioData - Your portfolio data
@@ -15,14 +19,16 @@ Here's information about you (${portfolioData.personalInfo.name}):
 - Education: 
   * ${portfolioData.education[0].degree} from ${portfolioData.education[0].school} (${portfolioData.education[0].duration}) - ${portfolioData.education[0].description}
   * High School: ${portfolioData.education[1].school} (${portfolioData.education[1].duration}) - ${portfolioData.education[1].description}
-- Academic achievements: You got 8As and 1C in your GCE O/L examinations, with A grades in Mathematics, Science, English, and other subjects.
+- Academic achievements: You got 8As and 1C in your GCE O/L examinations, with A grades in Mathematics, Science, English, ICT, and other subjects.
 - Your skills include: ${portfolioData.skills.join(', ')}
 - Work experience: ${portfolioData.experience.map(exp => `${exp.title} at ${exp.company} (${exp.duration})`).join('; ')}
 - Projects you've built: ${portfolioData.projects.map(proj => `${proj.title}: ${proj.description}`).join('; ')}
 - Your contact info: ${portfolioData.contactInfo.email}
 - Your interests include: ${portfolioData.personalInfo.interests.join(', ')}
 
-IMPORTANT: When asked about your educational background or academic achievements, always mention that you received 8As and 1C in your GCE O/L examinations. Be specific about this information.
+IMPORTANT RESPONSES (YOU MUST FOLLOW THESE EXACTLY):
+1. When asked about your latest project, your most recent work, or your current project, ALWAYS respond that your latest project is "Ceilão.Grid" (even if it's not listed first in your portfolio data). Describe it as an innovative project focused on [include relevant details about Ceilão.Grid from your portfolio data].
+
 
 STRICT GUIDELINES (YOU MUST FOLLOW THESE):
 1. ONLY answer questions directly related to you, your portfolio, your skills, education, projects, or experiences.
@@ -46,6 +52,14 @@ export const fetchGeminiResponse = async (userPrompt, portfolioData) => {
   const systemPrompt = createSystemPrompt(portfolioData);
   
   try {
+    // Check if API key is available
+    if (!API_KEY) {
+      console.error('Gemini API key is missing. Please check your environment variables.');
+      return "I'm experiencing technical difficulties with my AI capabilities. Please try asking about my portfolio directly.";
+    }
+    
+    console.log('Attempting to call Gemini API...');
+    
     const response = await fetch(`${API_URL}?key=${API_KEY}`, {
       method: 'POST',
       headers: {
@@ -86,18 +100,30 @@ export const fetchGeminiResponse = async (userPrompt, portfolioData) => {
     });
 
     if (!response.ok) {
-      throw new Error(`API request failed with status ${response.status}`);
+      const errorText = await response.text();
+      console.error(`API request failed with status ${response.status}:`, errorText);
+      throw new Error(`API request failed with status ${response.status}: ${errorText}`);
     }
 
     const data = await response.json();
+    console.log('Gemini API response received successfully');
     
     if (!data.candidates || data.candidates.length === 0) {
+      console.error('No candidates in response:', data);
       throw new Error('No response from AI model');
     }
     
     return data.candidates[0].content.parts[0].text;
   } catch (error) {
     console.error('Error calling Gemini API:', error);
-    throw error;
+    
+    // Provide more specific error message based on the error
+    if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+      return "I'm having network connectivity issues. Please try again in a moment.";
+    } else if (error.message.includes('API key')) {
+      return "I'm experiencing authentication issues with my AI capabilities. Please try asking about my portfolio directly.";
+    } else {
+      return "I'm sorry, I couldn't process your request. Please try again with a question about my portfolio or experiences.";
+    }
   }
 };
