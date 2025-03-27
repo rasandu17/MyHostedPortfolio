@@ -90,14 +90,17 @@ export const fetchGeminiResponse = async (prompt, portfolioData) => {
     
     console.log('Received response from Gemini API');
     return text;
-    
-    if (!data.candidates || data.candidates.length === 0) {
-      throw new Error('No response from AI model');
-    }
-    
-    return data.candidates[0].content.parts[0].text;
   } catch (error) {
-    console.error('Error calling Gemini API:', error);
-    throw error;
+    console.error('Error in fetchGeminiResponse:', error);
+    // Add specific error handling based on error types
+    if (error.message?.includes('API key')) {
+      return "I'm having trouble with my AI capabilities due to an API key issue. Please try again later.";
+    } else if (error.message?.includes('network')) {
+      return "I'm having trouble connecting to my AI capabilities. Please check your internet connection and try again.";
+    } else {
+      // Log the specific error for debugging
+      console.log('Error details:', JSON.stringify(error, null, 2));
+      return "I'm sorry, I couldn't process your request. Please try again with a question about my portfolio or experiences.";
+    }
   }
 };

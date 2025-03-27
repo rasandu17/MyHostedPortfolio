@@ -42,7 +42,7 @@ const Footer = () => {
               duration={500}
               className="text-xl sm:text-2xl font-bold text-primary cursor-pointer inline-block mb-3 sm:mb-4"
             >
-              YourName<span className="text-secondary">.dev</span>
+              Ravindu<span className="text-secondary">.me</span>
             </Link>
             <p className="text-gray-400 mb-4 sm:mb-6 text-sm sm:text-base">
               Computer Science Undergraduate passionate about creating innovative web applications and exploring new technologies.
