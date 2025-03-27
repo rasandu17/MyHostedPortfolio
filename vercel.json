@@ -1,4 +1,14 @@
 {
+  "version": 2,
+  "env": {
+    "VITE_GEMINI_API_KEY": "@vite_GEMINI_API_KEY"
+  },
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build"
+    }
+  ],
   "routes": [
     { "handle": "filesystem" },
     { "src": "/(.*)", "dest": "/index.html" }
