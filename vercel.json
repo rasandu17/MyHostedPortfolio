@@ -18,8 +18,5 @@
   "framework": "vite",
   "github": {
     "silent": true
-  },
-  "environmentVariables": {
-    "VITE_GEMINI_API_KEY": "PLACEHOLDER"
   }
 }
