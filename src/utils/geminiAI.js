@@ -1,5 +1,3 @@
-import { GoogleGenerativeAI } from '@google/generative-ai';
-
 const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
 const API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
 
@@ -44,63 +42,62 @@ For any questions about your projects, only discuss the exact projects listed in
  * @param {Object} portfolioData - Your portfolio data for context
  * @returns {Promise<string>} The AI's response
  */
-export const fetchGeminiResponse = async (prompt, portfolioData) => {
+export const fetchGeminiResponse = async (userPrompt, portfolioData) => {
+  const systemPrompt = createSystemPrompt(portfolioData);
+  
   try {
-    console.log('Fetching response with prompt:', prompt);
-    console.log('API Key available:', !!import.meta.env.VITE_GEMINI_API_KEY);
-    
-    // Initialize the Gemini API with the API key
-    const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
-    
-    // Get the generative model
-    const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
-    
-    // Create a context with portfolio data for the AI to reference
-    const portfolioContext = JSON.stringify({
-      name: portfolioData.personalInfo.name,
-      title: portfolioData.personalInfo.title,
-      summary: portfolioData.personalInfo.summary,
-      skills: portfolioData.skills,
-      projects: portfolioData.projects.map(p => ({
-        title: p.title,
-        description: p.description,
-        technologies: p.technologies
-      })),
-      experience: portfolioData.experience
+    const response = await fetch(`${API_URL}?key=${API_KEY}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        contents: [
+          {
+            role: 'user',
+            parts: [{ text: systemPrompt + "\n\nUser query: " + userPrompt }]
+          }
+        ],
+        generationConfig: {
+          temperature: 0.7,
+          topK: 40,
+          topP: 0.95,
+          maxOutputTokens: 1024,
+        },
+        safetySettings: [
+          {
+            category: 'HARM_CATEGORY_HARASSMENT',
+            threshold: 'BLOCK_MEDIUM_AND_ABOVE'
+          },
+          {
+            category: 'HARM_CATEGORY_HATE_SPEECH',
+            threshold: 'BLOCK_MEDIUM_AND_ABOVE'
+          },
+          {
+            category: 'HARM_CATEGORY_SEXUALLY_EXPLICIT',
+            threshold: 'BLOCK_MEDIUM_AND_ABOVE'
+          },
+          {
+            category: 'HARM_CATEGORY_DANGEROUS_CONTENT',
+            threshold: 'BLOCK_MEDIUM_AND_ABOVE'
+          }
+        ]
+      })
     });
-    
-    // Generate content with the user's prompt and portfolio context
-    const systemPrompt = `You are an AI assistant for ${portfolioData.personalInfo.name}. 
-    Use the following portfolio information to answer questions about ${portfolioData.personalInfo.name}'s 
-    background, skills, projects, and experience. Be concise but informative.
-    Portfolio data: ${portfolioContext}`;
-    
-    // Create a chat session
-    const chat = model.startChat({
-      history: [
-        { role: "user", parts: [{ text: systemPrompt }] },
-        { role: "model", parts: [{ text: "I'll help answer questions about your portfolio." }] }
-      ],
-    });
-    
-    console.log('Sending message to Gemini API...');
-    const result = await chat.sendMessage(prompt);
-    const response = await result.response;
-    const text = response.text();
-    
-    console.log('Received response from Gemini API');
-    return text;
-  } catch (error) {
-    console.error('Error in fetchGeminiResponse:', error);
-    // Add specific error handling based on error types
-    if (error.message?.includes('API key')) {
-      return "I'm having trouble with my AI capabilities due to an API key issue. Please try again later.";
-    } else if (error.message?.includes('network')) {
-      return "I'm having trouble connecting to my AI capabilities. Please check your internet connection and try again.";
-    } else {
-      // Log the specific error for debugging
-      console.log('Error details:', JSON.stringify(error, null, 2));
-      return "I'm sorry, I couldn't process your request. Please try again with a question about my portfolio or experiences.";
+
+    if (!response.ok) {
+      throw new Error(`API request failed with status ${response.status}`);
     }
+
+    const data = await response.json();
+    
+    if (!data.candidates || data.candidates.length === 0) {
+      throw new Error('No response from AI model');
+    }
+    
+    return data.candidates[0].content.parts[0].text;
+  } catch (error) {
+    console.error('Error calling Gemini API:', error);
+    throw error;
   }
 };
