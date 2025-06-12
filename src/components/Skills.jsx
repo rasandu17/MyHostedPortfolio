@@ -16,7 +16,7 @@ const Skills = () => {
     {
       title: "Backend & Databases",
       icon: <FiDatabase className="text-3xl text-primary" />,
-      skills: ["SpringBoot", "RESTful APIs", "MongoDB", "MySQL", "PostgreSQL", "Firebase"]
+      skills: ["SpringBoot", "RESTful APIs", "MongoDB", "MySQL", "Firebase"]
     },
     {
       title: "Other Skills",
