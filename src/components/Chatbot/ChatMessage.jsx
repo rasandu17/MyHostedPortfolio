@@ -28,17 +28,17 @@ const ChatMessage = ({ message }) => {
       
       // Add code block
       parts.push(
-        <div key={`code-${match.index}`} className="bg-gray-900 p-3 rounded my-2 text-gray-300 font-mono text-sm overflow-x-auto">
+        <div key={`code-${match.index}`} className="bg-figmaGrey p-3 rounded my-2 text-figmaBlack font-mono text-sm overflow-x-auto border border-figmaBlack">
           <div className="flex items-center justify-between mb-1">
-            <FiCode className="text-primary" />
+            <FiCode className="text-figmaOrange" />
             <button 
               onClick={() => navigator.clipboard.writeText(match[1])}
-              className="text-xs text-gray-400 hover:text-white"
+              className="text-xs text-figmaDarkGrey hover:text-figmaOrange"
             >
               Copy
             </button>
           </div>
-          <pre>{match[1]}</pre>
+          <pre className="text-figmaBlack">{match[1]}</pre>
         </div>
       );
       
@@ -74,9 +74,9 @@ const ChatMessage = ({ message }) => {
         transition={{ duration: 0.3 }}
         className="flex mb-4 justify-start"
       >
-        <div className="max-w-[80%] rounded-lg px-4 py-2 bg-gray-700 text-white rounded-tl-none">
+        <div className="max-w-[80%] rounded-lg px-4 py-2 bg-figmaOrange text-white rounded-tl-none border border-figmaBlack">
           <div className="flex items-center mb-1">
-            <span className="font-medium text-sm text-gray-300 flex items-center">
+            <span className="font-medium text-sm text-white flex items-center">
               {portfolioData.personalInfo.name}
             </span>
           </div>
@@ -86,7 +86,7 @@ const ChatMessage = ({ message }) => {
             <motion.a 
               href="/Ravindu Sandumith CV.pdf" 
               download
-              className="mt-3 inline-flex items-center gap-2 bg-primary hover:bg-secondary text-white px-4 py-2 rounded-md text-sm"
+              className="mt-3 inline-flex items-center gap-2 bg-white text-figmaOrange hover:bg-figmaGrey px-4 py-2 rounded-md text-sm border border-figmaBlack"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -112,19 +112,19 @@ const ChatMessage = ({ message }) => {
       className={`flex mb-4 ${isBot ? 'justify-start' : 'justify-end'}`}
     >
       <div 
-        className={`max-w-[80%] rounded-lg px-4 py-2 ${
+        className={`max-w-[80%] rounded-lg px-4 py-2 border border-figmaBlack ${
           isBot 
-            ? 'bg-gray-700 text-white rounded-tl-none'  // All bot responses use same background
-            : 'bg-primary text-white rounded-tr-none'  // User messages
+            ? 'bg-figmaOrange text-white rounded-tl-none'  // All bot responses use orange background
+            : 'bg-figmaGrey text-figmaBlack rounded-tr-none'  // User messages
         }`}
       >
         <div className="flex items-center mb-1">
           {isBot ? (
-            <span className="font-medium text-sm text-gray-300 flex items-center">
+            <span className="font-medium text-sm text-white flex items-center">
               {portfolioData.personalInfo.name}
             </span>
           ) : (
-            <span className="font-medium text-sm text-gray-200 flex items-center">
+            <span className="font-medium text-sm text-figmaBlack flex items-center">
               You
             </span>
           )}

@@ -133,22 +133,22 @@ const Chatbot = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.8 }}
             transition={{ duration: 0.3 }}
-            className="bg-gray-800 rounded-lg shadow-xl w-80 sm:w-96 mb-4 overflow-hidden border border-gray-700"
+            className="bg-white rounded-lg shadow-xl w-80 sm:w-96 mb-4 overflow-hidden border border-figmaBlack"
           >
-            <div className="bg-gray-900 p-4 flex justify-between items-center border-b border-gray-700">
+            <div className="bg-figmaOrange p-4 flex justify-between items-center border-b border-figmaBlack">
               <h3 className="text-white font-medium flex items-center">
-                <FiMessageSquare className="mr-2 text-primary" />
+                <FiMessageSquare className="mr-2" />
                 Want to know anything about me?
               </h3>
               <button 
                 onClick={toggleChatbot}
-                className="text-gray-400 hover:text-white transition-colors"
+                className="text-white hover:text-figmaBlack transition-colors"
               >
                 <FiX />
               </button>
             </div>
             
-            <div className="h-80 overflow-y-auto p-4 bg-gray-800 custom-scrollbar">
+            <div className="h-80 overflow-y-auto p-4 bg-white custom-scrollbar">
               {messages.map((message) => (
                 <ChatMessage key={message.id} message={message} />
               ))}
@@ -164,25 +164,25 @@ const Chatbot = () => {
               <div ref={messagesEndRef} />
             </div>
             
-            <form onSubmit={handleSubmit} className="p-3 border-t border-gray-700 bg-gray-900">
+            <form onSubmit={handleSubmit} className="p-3 border-t border-figmaBlack bg-white">
               <div className="flex">
                 <input
                   type="text"
                   value={input}
                   onChange={handleInputChange}
                   placeholder="Ask me anything..."
-                  className="flex-grow px-3 py-2 bg-gray-700 rounded-l-md focus:outline-none text-white placeholder-gray-400 border border-gray-600"
+                  className="flex-grow px-3 py-2 bg-white rounded-l-md focus:outline-none text-figmaBlack placeholder-figmaDarkGrey border border-figmaBlack"
                   disabled={isLoading}
                 />
                 <button
                   type="submit"
                   disabled={isLoading || !input.trim()}
-                  className={`bg-primary text-white px-3 py-2 rounded-r-md ${(!input.trim() || isLoading) ? 'opacity-50 cursor-not-allowed' : 'hover:bg-secondary'}`}
+                  className={`bg-figmaOrange text-white px-3 py-2 rounded-r-md border border-figmaBlack ${(!input.trim() || isLoading) ? 'opacity-50 cursor-not-allowed' : 'hover:opacity-90'}`}
                 >
                   <FiSend />
                 </button>
               </div>
-              <p className="text-xs text-gray-500 mt-2 text-center">
+              <p className="text-xs text-figmaDarkGrey mt-2 text-center">
                 Virtual conversation powered by AI
               </p>
             </form>
@@ -192,7 +192,7 @@ const Chatbot = () => {
       
       <motion.button
         onClick={toggleChatbot}
-        className="bg-primary hover:bg-secondary text-white p-4 rounded-full shadow-lg flex-shrink-0 w-14 h-14 flex items-center justify-center"
+        className="bg-figmaOrange hover:opacity-90 text-white p-4 rounded-full shadow-lg flex-shrink-0 w-14 h-14 flex items-center justify-center border border-figmaBlack"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
       >

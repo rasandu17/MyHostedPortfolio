@@ -43,7 +43,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'py-2 bg-gray-900/95 backdrop-blur-sm shadow-md' : 'py-3 sm:py-4 bg-transparent'}`}>
+    <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'py-2 bg-white/95 backdrop-blur-sm shadow-md border-b border-figmaBlack' : 'py-3 sm:py-4 bg-transparent'}`}>
       <div className="container mx-auto px-4 md:px-6 flex justify-between items-center">
         <Link 
           to="home" 
@@ -51,9 +51,9 @@ const Navbar = () => {
           smooth={true} 
           offset={-70} 
           duration={500}
-          className="text-xl sm:text-2xl font-bold text-primary cursor-pointer"
+          className="text-xl sm:text-2xl font-bold text-figmaBlack cursor-pointer"
         >
-          Ravindu<span className="text-secondary">.me</span>
+          Ravindu<span className="text-figmaOrange">.me</span>
         </Link>
 
         {/* Desktop Navigation */}
@@ -67,8 +67,8 @@ const Navbar = () => {
                   smooth={true}
                   offset={-70}
                   duration={500}
-                  className="text-sm lg:text-base text-gray-300 hover:text-primary transition-colors cursor-pointer px-1"
-                  activeClass="text-primary font-medium"
+                  className="text-sm lg:text-base text-figmaBlack hover:text-figmaOrange transition-colors cursor-pointer px-1 font-medium"
+                  activeClass="text-figmaOrange font-bold"
                 >
                   {link.name}
                 </Link>
@@ -81,7 +81,7 @@ const Navbar = () => {
         <div className="flex items-center md:hidden">
           <button
             onClick={toggleMenu}
-            className="p-1.5 rounded-md text-gray-300"
+            className="p-1.5 rounded-md text-figmaBlack"
             aria-label="Toggle menu"
           >
             {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
@@ -97,7 +97,7 @@ const Navbar = () => {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden w-full bg-gray-900 shadow-lg overflow-hidden"
+            className="md:hidden w-full bg-white shadow-lg overflow-hidden border-b border-figmaBlack"
           >
             <div className="container mx-auto px-4 py-4">
               <ul className="flex flex-col space-y-3">
@@ -109,8 +109,8 @@ const Navbar = () => {
                       smooth={true}
                       offset={-70}
                       duration={500}
-                      className="block py-2 text-gray-300 hover:text-primary transition-colors"
-                      activeClass="text-primary font-medium"
+                      className="block py-2 text-figmaBlack hover:text-figmaOrange transition-colors font-medium"
+                      activeClass="text-figmaOrange font-bold"
                       onClick={() => setIsOpen(false)}
                     >
                       {link.name}
