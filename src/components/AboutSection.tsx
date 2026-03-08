@@ -30,11 +30,11 @@ const AboutSection = () => {
             className="lg:col-span-7"
           >
             <p className="font-display text-2xl md:text-3xl font-medium leading-snug text-foreground mb-8">
-              I am a Computer Science undergraduate passionate about software engineering, 
-              quality assurance, and building scalable digital solutions.
+              I'm a Computer Science undergraduate with hands-on industry experience, passionate about 
+              software engineering, quality assurance, and building scalable digital solutions.
             </p>
             <p className="text-muted-foreground leading-relaxed mb-6">
-              Currently interning at the Prime Minister's Office of Sri Lanka, I work across 
+              With prior experience in the software industry, I have worked across 
               full-stack development, web scraping, automation, and software testing. I build 
               reliable systems with React, .NET, Spring Boot, and Python — always focused on 
               quality, efficiency, and real-world impact.

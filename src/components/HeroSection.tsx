@@ -60,9 +60,9 @@ const HeroSection = () => {
         >
           <div className="max-w-lg">
             <p className="text-[15px] text-muted-foreground leading-relaxed">
-              Computer Science Undergraduate & Software Development Intern at the 
-              Prime Minister's Office. Building scalable full-stack solutions with 
-              React, .NET, Spring Boot — focused on quality engineering & automation.
+              Computer Science Undergraduate with prior industry experience in software 
+              development. Building scalable full-stack solutions with React, .NET, 
+              Spring Boot — focused on quality engineering & automation.
             </p>
           </div>
 
