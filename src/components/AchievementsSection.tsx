@@ -34,9 +34,9 @@ const items = [
   },
   {
     icon: Heart,
-    label: "Achievement",
-    title: "Class Prize Winner — Mathematics",
-    subtitle: "Royal College Colombo",
+    label: "Competition",
+    title: "ACES CODERS 2024 — Certificate of Participation",
+    subtitle: "Organized by Association of Computer Engineering Students, Faculty of Engineering, University of Peradeniya",
   },
 ];
 

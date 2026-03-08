@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { GraduationCap, MapPin, Globe } from "lucide-react";
+import { GraduationCap, MapPin, Globe, Briefcase } from "lucide-react";
 
 const AboutSection = () => {
   return (
@@ -49,37 +49,55 @@ const AboutSection = () => {
             </div>
           </motion.div>
 
-          {/* Education */}
+          {/* Education & Experience */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="lg:col-span-5"
+            className="lg:col-span-5 space-y-12"
           >
-            <div className="flex items-center gap-2 mb-8">
-              <GraduationCap className="w-4 h-4 text-primary" />
-              <span className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">Education</span>
-            </div>
-            <div className="space-y-8">
+            {/* Experience */}
+            <div>
+              <div className="flex items-center gap-2 mb-8">
+                <Briefcase className="w-4 h-4 text-primary" />
+                <span className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">Experience</span>
+              </div>
               <div className="border-l-2 border-primary/30 pl-6">
-                <span className="text-[11px] uppercase tracking-wider text-primary">2024 – 2027</span>
-                <h4 className="font-heading text-lg font-semibold text-foreground mt-1">BSc (Hons) Computer Science</h4>
+                <span className="text-[11px] uppercase tracking-wider text-primary">AUG 2025 – FEB 2026</span>
+                <h4 className="font-heading text-lg font-semibold text-foreground mt-1">Software Development Intern</h4>
                 <p className="text-sm text-muted-foreground mt-1">
-                  IIT Sri Lanka — University of Westminster, UK
+                  Prime Minister's Office of Sri Lanka
                 </p>
               </div>
-              <div className="border-l-2 border-border pl-6">
-                <span className="text-[11px] uppercase tracking-wider text-muted-foreground">2023</span>
-                <h4 className="font-heading text-lg font-semibold text-foreground mt-1">Foundation Certificate in Computing</h4>
-                <p className="text-sm text-muted-foreground mt-1">
-                  Informatics Institute of Technology
-                </p>
+            </div>
+
+            {/* Education */}
+            <div>
+              <div className="flex items-center gap-2 mb-8">
+                <GraduationCap className="w-4 h-4 text-primary" />
+                <span className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground">Education</span>
               </div>
-              <div className="border-l-2 border-border pl-6">
-                <span className="text-[11px] uppercase tracking-wider text-muted-foreground">2014 – 2023</span>
-                <h4 className="font-heading text-lg font-semibold text-foreground">Royal College Colombo</h4>
-                <p className="text-sm text-muted-foreground mt-1">GCE O/L & A/L</p>
+              <div className="space-y-8">
+                <div className="border-l-2 border-primary/30 pl-6">
+                  <span className="text-[11px] uppercase tracking-wider text-primary">2024 – 2027</span>
+                  <h4 className="font-heading text-lg font-semibold text-foreground mt-1">BSc (Hons) Computer Science</h4>
+                  <p className="text-sm text-muted-foreground mt-1">
+                    IIT Sri Lanka — University of Westminster, UK
+                  </p>
+                </div>
+                <div className="border-l-2 border-border pl-6">
+                  <span className="text-[11px] uppercase tracking-wider text-muted-foreground">2023</span>
+                  <h4 className="font-heading text-lg font-semibold text-foreground mt-1">Foundation Certificate in Computing</h4>
+                  <p className="text-sm text-muted-foreground mt-1">
+                    Informatics Institute of Technology
+                  </p>
+                </div>
+                <div className="border-l-2 border-border pl-6">
+                  <span className="text-[11px] uppercase tracking-wider text-muted-foreground">2014 – 2023</span>
+                  <h4 className="font-heading text-lg font-semibold text-foreground">Royal College Colombo</h4>
+                  <p className="text-sm text-muted-foreground mt-1">GCE O/L & A/L</p>
+                </div>
               </div>
             </div>
           </motion.div>

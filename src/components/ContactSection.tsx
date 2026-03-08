@@ -2,8 +2,8 @@ import { motion } from "framer-motion";
 import { Mail, ArrowUpRight } from "lucide-react";
 
 const socials = [
-  { label: "LinkedIn", href: "#" },
-  { label: "GitHub", href: "#" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/ravindu-sandumith-240152325/" },
+  { label: "GitHub", href: "https://github.com/rasandu17" },
 ];
 
 const ContactSection = () => {
