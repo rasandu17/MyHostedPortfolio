@@ -1,70 +1,73 @@
-# Personal Portfolio
+# Welcome to your Lovable project
 
-A responsive personal portfolio website built with React, Tailwind CSS, and Framer Motion.
+## Project info
 
-## Features
+**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
 
-- Responsive design that works on all screen sizes
-- Dark theme UI
-- Smooth animations with Framer Motion
-- Contact form
-- Project showcase
-- Skills and experience sections
+## How can I edit this code?
 
-## Getting Started
+There are several ways of editing your application.
 
-### Installation
+**Use Lovable**
 
-1. Clone the repository
-2. Install dependencies:
+Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
 
-```bash
-npm install
-```
+Changes made via Lovable will be committed automatically to this repo.
 
-3. Create a `.env` file in the root directory with your Gemini API key:
+**Use your preferred IDE**
 
-4. Start the development server:
+If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
 
-```bash
+The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+
+Follow these steps:
+
+```sh
+# Step 1: Clone the repository using the project's Git URL.
+git clone <YOUR_GIT_URL>
+
+# Step 2: Navigate to the project directory.
+cd <YOUR_PROJECT_NAME>
+
+# Step 3: Install the necessary dependencies.
+npm i
+
+# Step 4: Start the development server with auto-reloading and an instant preview.
 npm run dev
 ```
 
-5. The site will be available at http://localhost:5173
+**Edit a file directly in GitHub**
 
-## Environment Variables
+- Navigate to the desired file(s).
+- Click the "Edit" button (pencil icon) at the top right of the file view.
+- Make your changes and commit the changes.
 
-For the chatbot to work, you need to set up an environment variable in Vercel:
+**Use GitHub Codespaces**
 
-1. Go to your Vercel project dashboard
-2. Navigate to Settings > Environment Variables
-3. Add a new variable:
-   - Name: `VITE_GEMINI_API_KEY`
-   - Value: Your Google Gemini API key
+- Navigate to the main page of your repository.
+- Click on the "Code" button (green button) near the top right.
+- Select the "Codespaces" tab.
+- Click on "New codespace" to launch a new Codespace environment.
+- Edit files directly within the Codespace and commit and push your changes once you're done.
 
-This will ensure the chatbot works correctly in the deployed environment.
+## What technologies are used for this project?
 
-## Deployment
+This project is built with:
 
-This project is configured for easy deployment on Vercel:
+- Vite
+- TypeScript
+- React
+- shadcn-ui
+- Tailwind CSS
 
-1. Push your code to GitHub
-2. Import the repository in Vercel
-3. Set up the environment variable as described above
-4. Deploy
+## How can I deploy this project?
 
-## Building for Production
+Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
 
-To create a production build:
+## Can I connect a custom domain to my Lovable project?
 
-```bash
-npm run build
-```
+Yes, you can!
 
-The built files will be in the `dist` folder.
+To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
-## Customization
-
-- Replace the placeholder content in component files with your own information
-- Add your own project images to the public folder
-- Customize colors by editing the `tailwind.config.js` file
+Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
