@@ -25,7 +25,7 @@ const HeroSection = () => {
           className="mb-8"
         >
           <span className="text-[11px] uppercase tracking-[0.4em] text-muted-foreground">
-            Portfolio — {new Date().getFullYear()}
+            npx ravindu
           </span>
         </motion.div>
 
